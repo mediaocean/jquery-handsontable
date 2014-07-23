@@ -19,15 +19,24 @@ WalkontableVerticalScrollbarNative.prototype.resetFixedPosition = function () {
 
   var box;
   if (this.scrollHandler === window) {
-    box = this.instance.wtTable.hider.getBoundingClientRect();
+		var fixedColumns = this.instance.getSetting('fixedColumnsLeft') > 0,
+			fixedRows = this.instance.getSetting('fixedRowsTop') > 0,
+			fixedElements = fixedColumns && fixedRows;
+
+		box = this.instance.wtTable.hider.getBoundingClientRect();
     var top = Math.ceil(box.top, 10);
     var bottom = Math.ceil(box.bottom, 10);
 
     if (top < 0 && bottom > 0) {
-      elem.style.top = '0';
-    }
+      if (fixedElements){
+				elem.style.top = '0';
+			} else {
+				elem.style.visibility = 'hidden';
+			}
+   }
     else {
       elem.style.top = top + 'px';
+			elem.style.visibility = 'visible';
     }
   }
   else {
@@ -100,7 +109,7 @@ WalkontableVerticalScrollbarNative.prototype.sumCellSizes = function (from, leng
 WalkontableVerticalScrollbarNative.prototype.applyToDOM = function () {
   var headerSize = this.instance.wtViewport.getColumnHeaderHeight();
   this.fixedContainer.style.height = headerSize + this.sumCellSizes(0, this.total) + 4 + 'px'; //+4 is needed, otherwise vertical scroll appears in Chrome (window scroll mode) - maybe because of fill handle in last row or because of box shadow
-  this.fixed.style.top = this.measureBefore + 'px';
+	this.fixed.style.top = this.measureBefore + 'px';
   this.fixed.style.bottom = '';
 };
 

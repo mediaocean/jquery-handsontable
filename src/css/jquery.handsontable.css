@@ -445,6 +445,14 @@ ul.context-menu-list li {
   display: none;
 }
 
+/*.handsontable .ht_clone_corner.handsontable table,*/
+/*.handsontable .ht_clone_left.handsontable table,*/
+/*.handsontable .ht_clone_top.handsontable table {*/
+    /*-webkit-box-shadow: none;*/
+    /*-moz-box-shadow: none;*/
+    /*box-shadow: none;*/
+/*}*/
+
 .htContextMenu table.htCore {
   outline: 1px solid #bbb;
 }

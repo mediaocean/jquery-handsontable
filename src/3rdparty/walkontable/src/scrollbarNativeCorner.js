@@ -7,32 +7,47 @@ function WalkontableCornerScrollbarNative(instance) {
 WalkontableCornerScrollbarNative.prototype = new WalkontableOverlay();
 
 WalkontableCornerScrollbarNative.prototype.resetFixedPosition = function () {
-  if (!this.instance.wtTable.holder.parentNode) {
+	if (!this.instance.wtTable.holder.parentNode) {
     return; //removed from DOM
   }
   var elem = this.clone.wtTable.holder.parentNode;
 
   var box;
+	console.log(this.scrollHandler===window);
   if (this.scrollHandler === window) {
+		var fixedColumns = this.instance.getSetting('fixedColumnsLeft') > 0,
+			fixedRows = this.instance.getSetting('fixedRowsTop') > 0,
+			fixedElements = fixedColumns && fixedRows;
+
     box = this.instance.wtTable.hider.getBoundingClientRect();
     var top = Math.ceil(box.top, 10);
     var bottom = Math.ceil(box.bottom, 10);
 
     if (top < 0 && bottom > 0) {
-      elem.style.top = '0';
+			if(fixedElements) {
+				elem.style.top = '0';
+			} else {
+				elem.style.visibility = 'hidden';
+			}
     }
     else {
       elem.style.top = top + 'px';
+			elem.style.visibility = 'visible';
     }
 
     var left = Math.ceil(box.left, 10);
     var right = Math.ceil(box.right, 10);
 
     if (left < 0 && right > 0) {
-      elem.style.left = '0';
+			if(fixedElements) {
+				elem.style.left = '0';
+			} else {
+				elem.style.visibility = 'hidden';
+			}
     }
     else {
       elem.style.left = left + 'px';
+			elem.style.visibility = 'visible';
     }
   }
   else {

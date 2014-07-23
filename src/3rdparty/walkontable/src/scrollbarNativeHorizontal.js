@@ -17,15 +17,24 @@ WalkontableHorizontalScrollbarNative.prototype.resetFixedPosition = function () 
 
   var box;
   if (this.scrollHandler === window) {
+		var fixedColumns = this.instance.getSetting('fixedColumnsLeft') > 0,
+			fixedRows = this.instance.getSetting('fixedRowsTop') > 0,
+			fixedElements = fixedColumns && fixedRows;
+
     box = this.instance.wtTable.hider.getBoundingClientRect();
     var left = Math.ceil(box.left, 10);
     var right = Math.ceil(box.right, 10);
 
     if (left < 0 && right > 0) {
-      elem.style.left = '0';
+			if(fixedElements) {
+				elem.style.left = '0';
+			} else {
+			elem.style.visibility = 'hidden';
+			}
     }
     else {
       elem.style.left = left + 'px';
+			elem.style.visibility = 'visible';
     }
   }
   else {
