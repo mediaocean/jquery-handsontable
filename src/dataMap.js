@@ -523,7 +523,9 @@
    * @return {String}
    */
   Handsontable.DataMap.prototype.getText = function (start, end) {
-    return SheetClip.stringify(this.getRange(start, end, this.DESTINATION_RENDERER));
+    var range = this.getRange(start, end, this.DESTINATION_RENDERER);
+    var custom = this.instance.PluginHooks.execute('getText', range);
+    return custom ? SheetClip.stringify(custom) : SheetClip.stringify(range);
   };
 
   /**
@@ -533,7 +535,9 @@
    * @return {String}
    */
   Handsontable.DataMap.prototype.getCopyableText = function (start, end) {
-    return SheetClip.stringify(this.getRange(start, end, this.DESTINATION_CLIPBOARD_GENERATOR));
+    var range = this.getRange(start, end, this.DESTINATION_CLIPBOARD_GENERATOR);
+    var custom = this.instance.PluginHooks.execute('getCopyableText', range);
+    return custom ? SheetClip.stringify(custom) : SheetClip.stringify(range);
   };
 
 })(Handsontable);
