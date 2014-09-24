@@ -41,7 +41,7 @@
     });
 
     $(document).off('mousemove.moveOutside_' + instance.guid).on('mousemove.moveOutside_' + instance.guid, function (event) {
-      if (!plugin.instance.autofill) {
+      if (!plugin.instance.autofill || !instance.getSettings().minRows) {
         return 0;
       }
 
@@ -248,7 +248,7 @@
       tableRows = this.instance.countRows(),
       that = this;
 
-    if (this.instance.view.wt.selections.fill.cellRange && this.addingStarted === false) {
+    if (this.instance.getSettings().minRows > 0 && this.instance.view.wt.selections.fill.cellRange && this.addingStarted === false) {
       fillCorners = this.instance.view.wt.selections.fill.getCorners();
 
       if (fillCorners[2] === tableRows - 1) {
