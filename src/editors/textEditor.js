@@ -242,8 +242,9 @@
     this.TEXTAREA.style.fontFamily = Handsontable.Dom.getComputedStyle(this.TD).fontFamily;
 
     this.autoResize.init(this.TEXTAREA, {
-      minHeight: Math.min(height, maxHeight),
-      maxHeight: maxHeight, //TEXTAREA should never be wider than visible part of the viewport (should not cover the scrollbar)
+      // Following two changes are fixing unreasonably small editor if the cell as at the bottom of the HOT parent div.
+      minHeight: height, //Math.min(height, maxHeight),
+      maxHeight: height, //maxHeight, //TEXTAREA should never be wider than visible part of the viewport (should not cover the scrollbar)
       minWidth: Math.min(width, maxWidth),
       maxWidth: maxWidth //TEXTAREA should never be wider than visible part of the viewport (should not cover the scrollbar)
     });
