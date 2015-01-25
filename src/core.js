@@ -311,9 +311,9 @@ Handsontable.Core = function (rootElement, userSettings) {
               if ((end && current.col > end.col) || (!priv.settings.minSpareCols && current.col > instance.countCols() - 1) || (current.col >= priv.settings.maxCols)) {
                 break;
               }
-              if (!instance.getCellMeta(current.row, current.col).readOnly) {
+              //if (!instance.getCellMeta(current.row, current.col).readOnly) {
                 setData.push([current.row, current.col, input[r][c]]);
-              }
+              //}
               current.col++;
               if (end && c === clen - 1) {
                 c = -1;
