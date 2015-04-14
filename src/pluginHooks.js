@@ -10,6 +10,7 @@ Handsontable.PluginHookClass = (function () {
       beforeDrawBorders: [],
       beforeChange: [],
       beforeChangeRender: [],
+      beforePaste: [],
       beforeRemoveCol: [],
       beforeRemoveRow: [],
       beforeValidate: [],
