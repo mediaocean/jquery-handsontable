@@ -43,7 +43,7 @@
       });
 
       // If hook returns falsy value don't proceed with paste.
-      if(Handsontable.hooks.execute(instance, 'beforePaste', areaStart.row, areaStart.col, areaEnd.row, areaEnd.col, inputArray, instance.getSettings().pasteMode)) {
+      if(instance.runHooks(instance, 'beforePaste', inputArray, areaStart.row, areaStart.col, areaEnd.row, areaEnd.col, instance.getSettings().pasteMode)) {
         instance.populateFromArray(areaStart.row, areaStart.col, inputArray, areaEnd.row, areaEnd.col, 'paste', instance.getSettings().pasteMode);
       }
     };
