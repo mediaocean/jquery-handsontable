@@ -523,9 +523,7 @@
    * @return {String}
    */
   Handsontable.DataMap.prototype.getText = function (start, end) {
-    var range = this.getRange(start, end, this.DESTINATION_RENDERER);
-    var custom = Handsontable.hooks.execute(this.instance, 'getText', range);
-    return custom ? SheetClip.stringify(custom) : SheetClip.stringify(range);
+    return SheetClip.stringify(this.getRange(start, end, this.DESTINATION_RENDERER));
   };
 
   /**
@@ -536,7 +534,7 @@
    */
   Handsontable.DataMap.prototype.getCopyableText = function (start, end) {
     var range = this.getRange(start, end, this.DESTINATION_CLIPBOARD_GENERATOR);
-    var custom = Handsontable.hooks.execute(this.instance, 'getCopyableText', range);
+    var custom = Handsontable.hooks.execute(this.instance, 'beforeCopy', range);
     return custom ? SheetClip.stringify(custom) : SheetClip.stringify(range);
   };
 
