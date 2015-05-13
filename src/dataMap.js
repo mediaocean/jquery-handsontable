@@ -535,7 +535,7 @@
   Handsontable.DataMap.prototype.getCopyableText = function (start, end) {
     var range = this.getRange(start, end, this.DESTINATION_CLIPBOARD_GENERATOR);
     var custom = Handsontable.hooks.execute(this.instance, 'beforeCopy', range);
-    return custom ? SheetClip.stringify(custom) : SheetClip.stringify(range);
+    return custom ? SheetClip.stringify(custom) : false;
   };
 
 })(Handsontable);

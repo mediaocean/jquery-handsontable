@@ -95,11 +95,12 @@
       var endCol = bottomRight.col;
       var finalEndRow = Math.min(endRow, startRow + copyRowsLimit - 1);
       var finalEndCol = Math.min(endCol, startCol + copyColsLimit - 1);
-
-      instance.copyPaste.copyPasteInstance.copyable(instance.getCopyableData(startRow, startCol, finalEndRow, finalEndCol));
-
-      if (endRow !== finalEndRow || endCol !== finalEndCol) {
-        Handsontable.hooks.run(instance, "afterCopyLimit", endRow - startRow + 1, endCol - startCol + 1, copyRowsLimit, copyColsLimit);
+      var data = instance.getCopyableData(startRow, startCol, finalEndRow, finalEndCol);
+      if(data) {
+          instance.copyPaste.copyPasteInstance.copyable(data);
+          if (endRow !== finalEndRow || endCol !== finalEndCol) {
+            Handsontable.hooks.run(instance, "afterCopyLimit", endRow - startRow + 1, endCol - startCol + 1, copyRowsLimit, copyColsLimit);
+          }
       }
     };
 
