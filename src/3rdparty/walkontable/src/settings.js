@@ -33,9 +33,9 @@ function WalkontableSettings(instance, settings) {
     },
     columnWidth: 50,
     rowHeight: function (row) {
-      return 23;
+      return 25;
     },
-    defaultRowHeight: 23,
+    defaultRowHeight: 25,
     selections: null,
     hideBorderOnMouseDownOver: false,
 
